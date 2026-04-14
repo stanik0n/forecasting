@@ -1,0 +1,2 @@
+service_level_pct,stockout_days,overstock_days,avg_closing_inventory,avg_days_of_supply,total_reorder_events
+99.73,229,0,22.15,12.63,3562

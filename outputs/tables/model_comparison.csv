@@ -1,0 +1,4 @@
+model,rmse,mae,mape,bias,n_obs
+lgbm,1.9357,1.0092,54.45,0.003,85372
+moving_average,2.2767,1.1041,59.04,-0.028,85372
+seasonal_naive,2.3291,1.1241,65.54,-0.028,85372
