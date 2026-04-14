@@ -48,9 +48,10 @@ def load_sell_prices(raw_dir: str, pilot_store: str | None = None) -> pd.DataFra
 def profile_dataframe(df: pd.DataFrame, name: str) -> None:
     print(f"\n--- {name} ---")
     print(f"  Shape       : {df.shape}")
-    print(f"  Columns     : {list(df.columns)}")
-    print(f"  Dtypes      :\n{df.dtypes.to_string()}")
-    null_counts = df.isnull().sum()
+    # For wide DataFrames, only show non-day columns
+    show_cols = [c for c in df.columns if not c.startswith("d_")]
+    print(f"  Columns     : {show_cols}")
+    null_counts = df[show_cols].isnull().sum()
     if null_counts.any():
         print(f"  Nulls       :\n{null_counts[null_counts > 0].to_string()}")
     else:

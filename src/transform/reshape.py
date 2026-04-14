@@ -101,9 +101,19 @@ def run(config_path: str = "config/settings.yaml") -> dict[str, pd.DataFrame]:
 
     print("=== Transform / Reshape ===")
 
+    max_train_days = cfg["data"].get("max_train_days")
+
     calendar = pd.read_parquet(os.path.join(interim_dir, "calendar.parquet"))
     sales = pd.read_parquet(os.path.join(interim_dir, "sales_raw.parquet"))
     sell_prices = pd.read_parquet(os.path.join(interim_dir, "sell_prices.parquet"))
+
+    # Limit day columns to last max_train_days to reduce memory for full-store runs
+    if max_train_days:
+        all_day_cols = [c for c in sales.columns if c.startswith("d_")]
+        keep_day_cols = all_day_cols[-int(max_train_days):]
+        id_cols = [c for c in sales.columns if not c.startswith("d_")]
+        sales = sales[id_cols + keep_day_cols]
+        print(f"  Limiting to last {max_train_days} days ({keep_day_cols[0]} to {keep_day_cols[-1]})")
 
     dim_calendar = build_dim_calendar(calendar)
     print(f"  dim_calendar: {dim_calendar.shape}")
@@ -116,7 +126,7 @@ def run(config_path: str = "config/settings.yaml") -> dict[str, pd.DataFrame]:
 
     fact_sales = build_fact_sales_daily(long_sales)
     print(f"  fact_sales_daily: {fact_sales.shape}")
-    print(f"  Date range: {fact_sales['date'].min().date()} → {fact_sales['date'].max().date()}")
+    print(f"  Date range: {fact_sales['date'].min().date()} to {fact_sales['date'].max().date()}")
     print(f"  Items: {fact_sales['item_id'].nunique():,}  |  Stores: {fact_sales['store_id'].nunique()}")
 
     dim_calendar.to_parquet(os.path.join(processed_dir, "dim_calendar.parquet"), index=False)

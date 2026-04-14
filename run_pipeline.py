@@ -1,14 +1,14 @@
 """
 End-to-end pipeline runner.
 Executes all 8 layers in sequence:
-  1. Ingest raw CSVs → interim parquet
-  2. Transform (melt + join) → fact_sales_daily, dim_calendar
-  3. Feature engineering → fact_features
+  1. Ingest raw CSVs -> interim parquet
+  2. Transform (melt + join) -> fact_sales_daily, dim_calendar
+  3. Feature engineering -> fact_features
   4. Baseline models (moving average + seasonal naive)
   5. LightGBM model
   6. Replenishment engine
   7. Evaluation (metrics + charts)
-  8. Dashboard data ready → launch Streamlit
+  8. Dashboard data ready -> launch Streamlit
 
 Usage:
   python run_pipeline.py                  # full pipeline
@@ -18,6 +18,12 @@ Usage:
 
 import argparse
 import sys
+import io
+
+# Force UTF-8 output on Windows so Unicode in docstrings/comments doesn't crash printing
+if sys.platform == "win32":
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")
 import time
 import traceback
 
@@ -36,10 +42,10 @@ def run_step(n: int, name: str, fn, *args, **kwargs):
     try:
         result = fn(*args, **kwargs)
         elapsed = time.time() - t0
-        print(f"\n  ✓ Completed in {elapsed:.1f}s")
+        print(f"\n  [OK] Completed in {elapsed:.1f}s")
         return result
     except Exception as e:
-        print(f"\n  ✗ FAILED: {e}")
+        print(f"\n  [FAILED]: {e}")
         traceback.print_exc()
         raise
 
@@ -85,7 +91,7 @@ def main():
         run_step(1, "Data Ingestion", ingest.run, args.config)
 
     if 2 in requested_steps:
-        run_step(2, "Reshape Sales (wide → long + joins)", reshape.run, args.config)
+        run_step(2, "Reshape Sales (wide to long + joins)", reshape.run, args.config)
 
     if 3 in requested_steps:
         run_step(3, "Feature Engineering", feature_engineering.run, args.config)
@@ -96,7 +102,7 @@ def main():
     if 5 in requested_steps and not args.skip_lgbm:
         run_step(5, "LightGBM Model", lgbm_model.run, args.config)
     elif 5 in requested_steps:
-        print("\n  Step 5: LightGBM — SKIPPED (--skip-lgbm flag)")
+        print("\n  Step 5: LightGBM - SKIPPED (--skip-lgbm flag)")
 
     if 6 in requested_steps:
         run_step(6, "Replenishment Engine", replenishment_engine.run, args.config)
