@@ -1,0 +1,8 @@
+pandas>=2.0
+numpy>=1.26
+pyarrow>=14.0
+lightgbm>=4.3
+scikit-learn>=1.4
+matplotlib>=3.8
+streamlit>=1.35
+pyyaml>=6.0

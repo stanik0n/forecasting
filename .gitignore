@@ -1,0 +1,33 @@
+# Data — too large to commit
+data/raw/
+data/interim/
+data/processed/
+
+# Model artifacts
+outputs/models/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local editor settings
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Outputs that regenerate from pipeline
+# (keep charts and tables — they're useful for the README/portfolio)
