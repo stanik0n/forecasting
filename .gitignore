@@ -1,7 +1,7 @@
 # Data — too large to commit
 data/raw/
 data/interim/
-data/processed/
+# data/processed/ is committed for Streamlit Cloud deployment (CA_1 demo data)
 
 # Model artifacts
 outputs/models/

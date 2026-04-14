@@ -33,7 +33,8 @@ def load_data():
             data[key] = pd.DataFrame()
 
     safe_load("fact_sales", os.path.join(PROCESSED_DIR, "fact_sales_daily.parquet"))
-    safe_load("fact_features", os.path.join(PROCESSED_DIR, "fact_features.parquet"))
+    # Use fact_sales_daily for planner view (fact_features is large and only needed for training)
+    data["fact_features"] = data["fact_sales"]
     safe_load("forecast_summary", os.path.join(PROCESSED_DIR, "dashboard_forecast_summary.parquet"))
     safe_load("sim", os.path.join(PROCESSED_DIR, "fact_inventory_simulation.parquet"))
     safe_load("reorder_params", os.path.join(PROCESSED_DIR, "reorder_params.parquet"))

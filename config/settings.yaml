@@ -8,11 +8,11 @@ paths:
 
 data:
   # Pilot scope: filter to one store for fast iteration. Set to null to use all.
-  pilot_store: null
+  pilot_store: CA_1
   # Set to null to use all categories
   pilot_category: null
   # Last N days of training data to use (null = all). Set to 730 for full-store runs to manage memory.
-  max_train_days: 365
+  max_train_days: null
 
 forecast:
   horizon_days: 28
