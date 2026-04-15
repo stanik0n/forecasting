@@ -2,6 +2,16 @@
 
 A portfolio-grade supply chain project built on the [M5 Forecasting Accuracy](https://www.kaggle.com/competitions/m5-forecasting-accuracy) dataset.
 
+## Dashboard
+
+![Executive Summary](docs/screenshot_executive.png)
+
+![Model Comparison](docs/screenshot_model_comparison.png)
+
+![Planner — Demand Forecast](docs/screenshot_planner_forecast.png)
+
+![Inventory Simulation](docs/screenshot_inventory_sim.png)
+
 ## What it does
 
 | Layer | Module | Output |
