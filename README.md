@@ -2,6 +2,10 @@
 
 A portfolio-grade supply chain project built on the [M5 Forecasting Accuracy](https://www.kaggle.com/competitions/m5-forecasting-accuracy) dataset.
 
+## Live Demo
+
+[https://forecasting-9axkqjqv2oaebabshqbxjj.streamlit.app/](https://forecasting-9axkqjqv2oaebabshqbxjj.streamlit.app/)
+
 ## Dashboard
 
 ![Executive Summary](docs/screenshot_executive.png)
