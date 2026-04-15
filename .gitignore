@@ -18,9 +18,6 @@ build/
 # Jupyter
 .ipynb_checkpoints/
 
-# Local editor settings
-.claude/
-
 # OS
 .DS_Store
 Thumbs.db
