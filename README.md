@@ -1,4 +1,4 @@
-# Demand Forecasting & Inventory Replenishment — Supply Chain Planning
+# Demand Forecasting & Inventory Replenishment - Supply Chain Planning
 
 End-to-end demand planning and inventory replenishment solution built on the [M5 Walmart dataset](https://www.kaggle.com/competitions/m5-forecasting-accuracy). Forecasts product demand using machine learning, simulates inventory with reorder-point logic, and delivers insights through a live dashboard with Executive, Planner, and Model views.
 
